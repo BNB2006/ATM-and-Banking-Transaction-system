@@ -2,7 +2,7 @@
 
 The program implements a simulation of an ATM Banking System with features such as account creation, user authentication, and various transaction options (balance inquiry, withdrawal, deposit). The system allows users to manage their account details and performs operations securely by utilizing PIN-based authentication. Data persistence is handled through file operations to store and retrieve user data.
 
-Transaction Options:<br>
+<h3>Transaction Options:</h3><br>
  After a successful login, users can:
 - **Check Balance:** View the current account balance.
 - **Withdraw Money:** Withdraw funds from the account (if the balance is sufficient).
@@ -19,8 +19,7 @@ Each transaction (such as withdrawing funds or changing the PIN) requires the us
 
 Users can log out and exit the system, with all changes saved before exiting.
 
-How to Use:
-
+<h3>How to Use:</h3>
 1. **Create a new account** by choosing the option from the main menu.
 2. **Login** using your account number and PIN.
 3. Perform transactions such as checking balance, withdrawing money, or depositing funds.
