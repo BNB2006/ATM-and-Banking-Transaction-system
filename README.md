@@ -25,8 +25,8 @@ How to Use:
 3. Perform transactions such as checking balance, withdrawing money, or depositing funds.
 4. Update your profile or change your PIN for enhanced security.
 5. **Logout** when finished, and the system will save your data for the next session.
-In this Program I used :
-
+   
+<h3>In this Program I used :</h3><br>
 - **C++:** For implementing the ATM functionality and user interface.
 - **File Handling:** Used to persist user data in a text file (`UserDatabase.txt`).
 UserDatabase.txt: Stores user data in .txt format (Account No, Name, PIN, Balance, Mobile No, DOB)
