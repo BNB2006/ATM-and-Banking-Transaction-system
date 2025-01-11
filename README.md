@@ -10,6 +10,7 @@ Transaction Options:<br>
 - **Change PIN:** Update the account PIN for added security.
 - **View Profile:** View the user’s profile, including their account details.
 - **Update Profile:** Modify user details such as name, mobile number, or date of birth.<br>
+
 The program saves user data to a file (UserDatabase.txt) to persist information across sessions. User details are loaded from this file at the start of the program and saved back after any changes.
 
 The program uses ANSI escape codes to display messages in different colors, providing a clear distinction between success, error, warnings, and user prompts.
@@ -26,7 +27,7 @@ How to Use:
 4. Update your profile or change your PIN for enhanced security.
 5. **Logout** when finished, and the system will save your data for the next session.
    
-<h3>In this Program I used :</h3><br>
+<h3>In this Program I used :</h3>
 - **C++:** For implementing the ATM functionality and user interface.
 - **File Handling:** Used to persist user data in a text file (`UserDatabase.txt`).
 UserDatabase.txt: Stores user data in .txt format (Account No, Name, PIN, Balance, Mobile No, DOB)
