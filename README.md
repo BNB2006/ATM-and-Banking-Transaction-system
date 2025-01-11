@@ -2,14 +2,15 @@
 
 The program implements a simulation of an ATM Banking System with features such as account creation, user authentication, and various transaction options (balance inquiry, withdrawal, deposit). The system allows users to manage their account details and performs operations securely by utilizing PIN-based authentication. Data persistence is handled through file operations to store and retrieve user data.
 
+
 <h3>Transaction Options:</h3>
- After a successful login, users can:
-- **Check Balance:** View the current account balance.
-- **Withdraw Money:** Withdraw funds from the account (if the balance is sufficient).
-- **Deposit Money:** Deposit a specified amount into the account.
-- **Change PIN:** Update the account PIN for added security.
-- **View Profile:** View the user’s profile, including their account details.
-- **Update Profile:** Modify user details such as name, mobile number, or date of birth.<br>
+ <h4>After a successful login, users can:<h4>
+<li>Check Balance:** View the current account balance.</li>
+<li>Withdraw Money:** Withdraw funds from the account (if the balance is sufficient).</li>
+<li>Deposit Money:** Deposit a specified amount into the account.</li>
+<li>Change PIN:** Update the account PIN for added security.</li>
+<li>View Profile:** View the user’s profile, including their account details.</li>
+<li>Update Profile:** Modify user details such as name, mobile number, or date of birth.<br></li>
 
 The program saves user data to a file (UserDatabase.txt) to persist information across sessions. User details are loaded from this file at the start of the program and saved back after any changes.
 
