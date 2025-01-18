@@ -124,7 +124,6 @@ class Bank{
 
         void userProfile(){ 
             cout<<GREEN<<"User Profile -\n"<<RESET;
-            //from ref.cpp line No 2654
             cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
             cout<<MAGENTA<<"|"<<left<<setw(21)<<" UserName"<<"| "<<setw(27)<<Name<<"|"<<RESET<<endl;
             cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
@@ -165,7 +164,7 @@ void loadUsers(vector<Bank> &users){
     ifstream inFile("UserDatabase.txt");
     if(!inFile){
         cout<<RED<<"No Data found, Could not open file for reading.Crreating new file...\n"<<RESET;
-        return; // If the file doesn't exist, return without loading anything
+        return;
     }
     string line;
     while(getline(inFile,line)){
@@ -365,7 +364,6 @@ int main() {
 
                     int transactionChoice;
                     do {
-                        // cout<<string(10,' ')<<REVERSED<<BLUE<<string(10,'-')<<"TRANSACTION"<<string(10,'-')<<endl;
                         cout <<endl<<string(10,' ')<<REVERSED<< CYAN << "Please, Select your Transaction\n" << RESET;
                         cout << BLUE << "+----------------------+---------------------------+\n" << RESET;
                         cout << BLUE << "| (1) Check Balance    | (2) Change the Pin        |\n" << RESET;
@@ -415,7 +413,7 @@ int main() {
                             default:
                                 cout << RED << "Invalid Option!\n" << RESET;
                         }
-                    } while (transactionChoice != 7); // Exit the transaction menu on choice 7
+                    } while (transactionChoice != 7);
 
                 } else {
                     cout << RED << "Invalid Account Number or PIN!\n" << RESET;

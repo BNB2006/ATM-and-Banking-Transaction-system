@@ -3,8 +3,9 @@
 The program implements a simulation of an ATM Banking System with features such as account creation, user authentication, and various transaction options (balance inquiry, withdrawal, deposit). The system allows users to manage their account details and performs operations securely by utilizing PIN-based authentication. Data persistence is handled through file operations to store and retrieve user data.
 
 <h3>Transaction Options:</h3>
+<hr>
 After a successful login, users can:
-<ul style="list-style-type:i;">
+<ul style="list-style-type:square;">
 <li>Check Balance : View the current account balance.</li>
 <li>Withdraw Money : Withdraw funds from the account (if the balance is sufficient).</li>
 <li>Deposit Money : Deposit a specified amount into the account.</li>
@@ -20,7 +21,9 @@ Each transaction (such as withdrawing funds or changing the PIN) requires the us
 
 Users can log out and exit the system, with all changes saved before exiting.</p>
 
-<h3>How to Use:</h3><ul style="list-style-type:square;">
+<h3>How to Use:</h3>
+<hr>
+<ul style="list-style-type:square;">
 <li>Create a new account by choosing the option from the main menu.</li>
 <li>Login using your account number and PIN.</li>
 <li>Perform transactions such as checking balance, withdrawing money, or depositing funds.</li>
@@ -28,7 +31,7 @@ Users can log out and exit the system, with all changes saved before exiting.</p
 <li>Logout  when finished, and the system will save your data for the next session.</li></ul>
    
 <h3>In this Program I used :</h3>
-<ul>
+<hr><ul style="list-style-type:square">
 <li>C++: For implementing the ATM functionality and user interface.</li>
 <li>File Handling: Used to persist user data in a text file </li>(`UserDatabase.txt`).
 UserDatabase.txt: Stores user data in .txt format (Account No, Name, PIN, Balance, Mobile No, DOB).
@@ -36,4 +39,5 @@ UserDatabase.txt: Stores user data in .txt format (Account No, Name, PIN, Balanc
 
 <p>This program is an excellent starting point for learning how to implement basic banking operations in C++, including file handling, object-oriented programming, and handling user input.
 
+<hr>
 Feel free to customize, enhance, and use this program for educational or practical purposes!</p>
