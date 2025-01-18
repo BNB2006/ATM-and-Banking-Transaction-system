@@ -1,163 +1,178 @@
-
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<vector>
-#include<iomanip>
-#include<sstream>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <iomanip>
+#include <sstream>
+#include <algorithm> // For std::all_of
 using namespace std;
 
 const string RESET = "\033[0m";     // Reset the color
 const string GREEN = "\033[1;32m"; // Green color  - [Success]
-const string RED = "\033[1;31m";   //  Red color   -  [Error]
-const string YELLOW = "\033[1;33m";  // Yellow color - [Enter] 
+const string RED = "\033[1;31m";   // Red color   - [Error]
+const string YELLOW = "\033[1;33m";  // Yellow color - [Enter]
 const string BLUE = "\033[1;34m";   // Blue color  - [Program Menu]
-const string CYAN = "\033[36m";      //  same as SkyBlue -[Prompt]
+const string CYAN = "\033[36m";      // SkyBlue - [Prompt]
 const string MAGENTA = "\033[35m";    // Magenta color
-const std::string BOLD_WHITE = "\033[1;37m"; //bold White color
+const string BOLD_WHITE = "\033[1;37m"; // Bold White color
 const string BOLD = "\033[1m";         // Bold
 const string UNDERLINE = "\033[4m";    // Underline
 const string REVERSED = "\033[7m";     // Reversed colors
 
-
-class Bank{
+class Bank {
     int Account_No;
     string Name;
     int Pin;
     float Balance;
     string Mobile_No, DOB;
 
-    public:
-        void setdata(int account_No_a,string name_a,int PIN_a,float balance_a,string moblie_No_a,string DateOfBirth){
-            Account_No=account_No_a;
-            Name=name_a;
-            Pin=PIN_a;
-            Balance=balance_a;
-            Mobile_No=moblie_No_a;
-            DOB=DateOfBirth;
-        }
+public:
+    void setdata(int account_No_a, string name_a, int PIN_a, float balance_a, string mobile_No_a, string DateOfBirth) {
+        Account_No = account_No_a;
+        Name = name_a;
+        Pin = PIN_a;
+        Balance = balance_a;
+        Mobile_No = mobile_No_a;
+        DOB = DateOfBirth;
+    }
 
-        string UserName(){
-            return (Name);
-        }
+    string UserName() {
+        return Name;
+    }
 
-        int getAccountNo() const{
-            return Account_No;
-        }
+    int getAccountNo() const {
+        return Account_No;
+    }
 
-        int get_Pin(){
-            return Pin;
-        }
+    int get_Pin() {
+        return Pin;
+    }
 
-        int changePIN(int newPin){
-            Pin=newPin;
-        }
+    void changePIN(int newPin) {
+        Pin = newPin;
+    }
 
-        float getBalance(){
-            return Balance;
-        }
+    float getBalance() {
+        return Balance;
+    }
 
-         void wrong_pin(){
-            cout<<RED<<"-----------------------\n";
-            cout<<"  wrong Pin Entered !\n";
-            cout<<"-----------------------\n"<<RESET;
-        }
+    void wrong_pin() {
+        cout << RED << "-----------------------\n";
+        cout << "  Wrong Pin Entered !\n";
+        cout << "-----------------------\n" << RESET;
+    }
 
-        void Withdraw(float amount){
-            if(amount>Balance){
-                cout<<RED<<"[ERROR]"<<"Insufficient founds !\n\n"<<RESET;
+    void Withdraw(float amount) {
+        if (amount > Balance) {
+            cout << RED << "[ERROR] Insufficient funds!\n\n" << RESET;
+        } else {
+            Balance -= amount;
+            cout << GREEN << "[SUCCESS] Withdrawal successful! Collect Your Cash.\n" << RESET;
+            cout << GREEN << "Current balance: " << Balance << RESET << endl << endl;
+        }
+    }
+
+    void Deposit(float amount) {
+        if (amount <= 0) {
+            cout << RED << "[ERROR] Invalid deposit amount!\n\n" << RESET;
+        } else {
+            Balance += amount;
+            cout << GREEN << "[SUCCESS] Deposit successful!\n" << RESET;
+            cout << GREEN << "Current Balance: " << Balance << RESET << endl << endl;
+        }
+    }
+
+    void UpdateProfile() {
+        cout << CYAN << "Enter your choice to update profile:\n" << RESET;
+        cout << BLUE << "1. User Name\n2. Mobile Number\n3. Date of Birth\n" << RESET;
+        cout << YELLOW << "Choice: " << RESET;
+        int choice;
+        cin >> choice;
+        switch (choice) {
+            case 1: {
+                cout << YELLOW << "Enter new User Name: " << RESET;
+                string newname;
+                cin.ignore();
+                getline(cin, newname);
+                Name = newname;
+                cout << GREEN << "Name changed successfully.\n" << RESET;
+                break;
             }
-            else{
-                Balance-=amount;
-                cout<<GREEN<<"[SUCCESS]"<<"Withdrawal successful Collect Your Cash !\n"<<RESET;
-                cout<<GREEN<<"Current balance :"<<Balance<<RESET<<endl<<endl;
+            case 2: {
+                cout << YELLOW << "Enter Mobile Number: " << RESET;
+                string newMobile;
+                cin >> newMobile;
+                Mobile_No = newMobile;
+                cout << GREEN << "Mobile Number changed successfully.\n" << RESET;
+                break;
             }
-        }
-
-        void Deposit(float amount){
-            if(amount <= 0 ){
-                cout<<RED<<"[ERROR]"<<" Invalid deposit amount !\n\n"<<RESET;
+            case 3: {
+                cout << YELLOW << "Enter new Date of Birth: " << RESET;
+                string newDOB;
+                cin >> newDOB;
+                DOB = newDOB;
+                cout << GREEN << "Date of Birth changed successfully.\n" << RESET;
+                break;
             }
-            else{
-                Balance+=amount;
-                cout<<GREEN<<"[SUCCESS]"<<" Deposit successful !\n"<<RESET;
-                cout<<GREEN<<"Current Balance :"<<Balance<<RESET<<endl<<endl;
+            default:
+                cout << RED << "Invalid Choice.\n" << RESET;
+        }
+    }
+
+    void userProfile() {
+        cout << GREEN << "User Profile -\n" << RESET;
+        cout << MAGENTA << "+" << string(50, '-') << "+" << RESET << endl;
+        cout << MAGENTA << "|" << left << setw(21) << " UserName" << "| " << setw(27) << Name << "|" << RESET << endl;
+        cout << MAGENTA << "+" << string(50, '-') << "+" << RESET << endl;
+        cout << MAGENTA << "|" << left << setw(21) << " Account No. :" << "| " << setw(27) << Account_No << "|" << RESET << endl;
+        cout << MAGENTA << "+" << string(50, '-') << "+" << RESET << endl;
+        cout << MAGENTA << "|" << left << setw(21) << " Mobile No. :" << "| " << setw(27) << Mobile_No << "|" << RESET << endl;
+        cout << MAGENTA << "+" << string(50, '-') << "+" << RESET << endl;
+        cout << MAGENTA << "+" << left << setw(21) << " Date Of Birth :" << "| " << setw(27) << DOB << "|" << RESET << endl;
+        cout << MAGENTA << "+" << string(50, '-') << "+" << RESET << endl << endl;
+    }
+
+    string toString() const {
+        return to_string(Account_No) + "," + Name + "," + to_string(Pin) + "," + to_string(Balance) + "," + Mobile_No + "," + DOB;
+    }
+
+    static Bank fromString(const string &userData) {
+        Bank user;
+        stringstream ss(userData);
+        string token;
+
+        try {
+            getline(ss, token, ',');
+            if (!token.empty() && std::all_of(token.begin(), token.end(), ::isdigit)) {
+                user.Account_No = stoi(token);
+            } else {
+                throw invalid_argument("Invalid Account Number");
             }
-        }
 
-        void UpdateProfile(){
-            cout<<CYAN<<"Enter your choice to update profile :\n"<<RESET;
-            cout<<BLUE<<"1. User Name\n2. Mobile Number\n3. Date of Birth\n"<<RESET;
-            cout<<YELLOW<<"Choice :"<<RESET;
-            int choice;
-            cin>>choice;
-            switch(choice){
-                case 1:{
-                    cout<<YELLOW<<"Enter new User Name :"<<RESET;
-                    string newname;
-                    cin.ignore();
-                    getline(cin,newname);
-                    Name=newname;
-                    cout<<GREEN<<"Name Change successfully..\n"<<RESET;
-                    break;
-                }
-                case 2:{
-                    cout<<YELLOW<<"Enter Mobile Number :"<<RESET;
-                    string newMobile;
-                    cin>>newMobile;
-                    Mobile_No=newMobile;
-                    cout<<GREEN<<"Mobile Number changed successfully..\n"<<RESET;
-                    break;
-                }
-                case 3:{
-                    cout<<YELLOW<<"Enter new Date of Birt :"<<RESET;
-                    string newDOB;
-                    cin>>newDOB;
-                    DOB=newDOB;
-                    cout<<GREEN<<"Date of Birth changed successfully..\n"<<RESET;
-                    break;
-                }
-                default:
-                    cout<<RED<<"Invalid Choice..\n"<<RESET;
+            getline(ss, user.Name, ',');
+            getline(ss, token, ',');
+            if (!token.empty() && std::all_of(token.begin(), token.end(), ::isdigit)) {
+                user.Pin = stoi(token);
+            } else {
+                throw invalid_argument("Invalid PIN");
             }
+
+            getline(ss, token, ',');
+            if (!token.empty() && std::all_of(token.begin(), token.end(), ::isdigit)) {
+                user.Balance = stof(token);
+            } else {
+                throw invalid_argument("Invalid Balance");
+            }
+
+            getline(ss, user.Mobile_No, ',');
+            getline(ss, user.DOB, ',');
+
+        } catch (const exception &e) {
+            cerr << "[ERROR] Error parsing user data: " << e.what() << endl;
         }
 
-        void userProfile(){ 
-            cout<<GREEN<<"User Profile -\n"<<RESET;
-            cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
-            cout<<MAGENTA<<"|"<<left<<setw(21)<<" UserName"<<"| "<<setw(27)<<Name<<"|"<<RESET<<endl;
-            cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
-            cout<<MAGENTA<<"|"<<left<<setw(21)<<" Account No. :"<<"| "<<setw(27)<<Account_No<<"|"<<RESET<<endl;
-            cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
-            cout<<MAGENTA<<"|"<<left<<setw(21)<<" Mobile No. :"<<"| "<<setw(27)<<Mobile_No<<"|"<<RESET<<endl;
-            cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl;
-            cout<<MAGENTA<<"+"<<left<<setw(21)<<" Date Of Birth :"<<"| "<<setw(27)<<DOB<<"|"<<RESET<<endl;
-            cout<<MAGENTA<<"+"<<string(50,'-')<<"+"<<RESET<<endl<<endl;
-        }
-
-        string toString() const{
-            return to_string(Account_No) + "," + Name + "," + to_string(Pin) + "," + to_string(Balance) + "," + Mobile_No + "," + DOB;
-        }
-
-        static Bank fromString(const string &userData){
-            Bank user;
-            stringstream ss(userData);
-            string token;
-
-            getline(ss,token,',');
-            user.Account_No=stoi(token);
-            getline(ss,user.Name,',');
-            getline(ss,token,',');
-            user.Pin=stoi(token);
-            getline(ss,token,',');
-            user.Balance=stoi(token);
-            getline(ss,user.Mobile_No,',');
-            getline(ss,user.DOB,',');
-
-            return user;
-        }
-
-    
+        return user;
+    }
 };
 
 void loadUsers(vector<Bank> &users){
@@ -430,5 +445,3 @@ int main() {
 
     return 0;
 }
-
-
